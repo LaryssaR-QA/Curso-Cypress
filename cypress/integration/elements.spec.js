@@ -1,7 +1,5 @@
 /// <reference types="cypress" />
 
-const { delay } = require("cypress/types/bluebird")
-
 describe('Work with basic elements',() => {
     before(() => {
         cy.visit('https://wcaquino.me/cypress/componentes.html')
@@ -9,6 +7,7 @@ describe('Work with basic elements',() => {
 
     beforeEach(() => {
         cy.reload()
+        
     })//Em todos os Tests deve conter boas praticas no codigo "BEFORE EACH"
 
     //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -41,15 +40,22 @@ describe('Work with basic elements',() => {
         .should('have.value', 'Cypress Test area sugestão')
 
         cy.get(':nth-child(3) > :nth-child(6) > input')
-        .type('campo de Texto')
-        .should('have.value', 'campo de Texto')
-
-       
+        .type('campo de Texto',{delay:100})
+        .should('have.value','campo de Texto')
   
-
-
-
-
     })// Preenchimento nas caixas de texto "Text BOX"  
   
+    
+    it.only('RadioButton', () =>{
+        cy.get('#formSexoFem')
+        .click()
+        .should('be.checked')//acertiva
+
+        cy.get('#formSexoMasc')
+        .should('not.be.checked')//verificar se o masculuno não está selecionado
+
+        cy.get("[name='formSexo']").should('have.length', 2)  
+
+
+    })//clique nas caixas de seleção
 })
