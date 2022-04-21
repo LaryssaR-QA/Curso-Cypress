@@ -27,4 +27,4 @@ describe('Cypress basic', () => {
 
     })//Função de clicar em um botão
     
-})// acessar a pagina web teste
+})// acessar a pagina web

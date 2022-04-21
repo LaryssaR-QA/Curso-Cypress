@@ -1,5 +1,7 @@
 /// <reference types="cypress" />
 
+const { delay } = require("cypress/types/bluebird")
+
 describe('Work with basic elements',() => {
     before(() => {
         cy.visit('https://wcaquino.me/cypress/componentes.html')
@@ -29,4 +31,25 @@ describe('Work with basic elements',() => {
 
     })
 
+    it.only('TextFields', () => {
+        cy.get('#formNome').type('Cypress Test')
+        cy.get('#formNome').should('have.value', 'Cypress Test')
+
+
+        cy.get('#elementosForm\\:sugestoes')
+        .type('Cypress Test area sugestão')
+        .should('have.value', 'Cypress Test area sugestão')
+
+        cy.get(':nth-child(3) > :nth-child(6) > input')
+        .type('campo de Texto')
+        .should('have.value', 'campo de Texto')
+
+       
+  
+
+
+
+
+    })// Preenchimento nas caixas de texto "Text BOX"  
+  
 })
