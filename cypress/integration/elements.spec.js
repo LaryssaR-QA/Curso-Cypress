@@ -46,7 +46,7 @@ describe('Work with basic elements',() => {
     })// Preenchimento nas caixas de texto "Text BOX"  
   
     
-    it.only('RadioButton', () =>{
+    it('RadioButton', () =>{
         cy.get('#formSexoFem')
         .click()
         .should('be.checked')//acertiva
@@ -57,5 +57,25 @@ describe('Work with basic elements',() => {
         cy.get("[name='formSexo']").should('have.length', 2)  
 
 
-    })//clique nas caixas de seleção
-})
+    })//Caixas de seleção SEXO - somente uma unica opção por vez
+
+    it('Chequebox', () => {
+         cy.get('[name = formComidaFavorita]')
+        .click({multiple: true})    
+
+    })//Chequebox Comida seleção de mais de uma opção
+
+    it.only('Combo', () => {
+
+        cy.get('[data-test=dataEscolaridade]')
+        .select('2o grau completo')
+        .should('have.value', '2graucomp')// validação do teste 
+    })//combo de seleção
+
+    it.only('ComboMultiplo', () => {
+        cy.get('[data-testid=dataEsportes]')
+        .select(['natacao', 'Corrida','nada'])
+
+    })//ComboMultiplo de seleção
+
+})//fim do describe
