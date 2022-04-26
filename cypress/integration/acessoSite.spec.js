@@ -2,7 +2,7 @@
 
 describe('Cypress basic', () => {
 
-    it('Should visit a page and assert title', () => {
+    it.only('Should visit a page and assert title', () => {
 
         //const title = cy.title()
         //console.log(title)
@@ -14,10 +14,15 @@ describe('Cypress basic', () => {
         .should('be.equal', 'Campo de Treinamento')
         .and('contain', 'Campo de Treinamento')
 
-        //TODO imprimir o log no console
-        //TODO escrever o log em um campo de texto
+        cy.title().then(title => {
+            console.log(title)
+        })
 
-    })
+        cy.title().should(title => {
+            console.log(title)
+        })
+
+     })
 
     it('should find and interact with an elemento', () => {
         cy.visit('https://wcaquino.me/cypress/componentes.html')

@@ -27,7 +27,7 @@ describe('Esperas...', ()=> {
     })//campo de espera!
 
     
-    it.only('Deve fazer retrys', () =>{
+    it('Deve fazer retrys', () =>{
 
         cy.get('#buttonDelay').click()
 
@@ -38,7 +38,39 @@ describe('Esperas...', ()=> {
     
     })//campo de espera com TYPE
 
+    it('Uso do find', () => {
 
+        cy.get('#buttonList').click()
+        cy.get('#lista li')
+        .find('span')
+        .should('contain', 'Item 1') //validação item 2
+
+        cy.get('#lista li span')
+        .should('contain', 'Item 2') //validação item 2
+      
+    })//Campo Listar com o comando FIND
+
+    it.only('Uso do Timeout', () => {
+
+        /*cy.wait(5000) - tempo fixo de espera
+
+        cy.get('#buttonDelay').click()
+        cy.get('#novoCampo',{ timeout:7000 }).should('exist')*/
+
+        cy.get('#buttonListDOM').click()
+        cy.get('#lista li span', { timeout: 30000 })
+        .should('have.length', '2')
+        
+    })//tempo de resposta caso o sistema esteja com lentidão
+
+    it.only('Click retry', () => {
+
+        cy.get('#buttonCount')
+        .click()
+        .should('have.value', '1')
+    })
+
+    
 
 })//fim do describe
 
