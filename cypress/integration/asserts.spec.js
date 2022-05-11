@@ -13,7 +13,7 @@ it('Equality', () => {
 it('Equality', () => {
     const a = 1;
 
-    expect(a, 'Deveria ser 1').equal(2);
+    expect(a, 'Deveria ser 1').equal(1);
     expect('a').not.to.be.equal('b')
 })// caso dê falha com mensagem
 
@@ -42,7 +42,7 @@ expect(obj).eq(obj)
 expect(obj).to.be.equal(obj)
 expect(obj).to.be.deep.equal({a:1, b:2})
 expect(obj).eql({a:1, b:2})
-expect(obj).include({a:2})
+expect(obj).to.not.include({a:2})
 expect(obj).to.have.property('b')
 expect(obj).to.have.property('b', 2)
 expect(obj).to.not.be.calledBefore.empty
