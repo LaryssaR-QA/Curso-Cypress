@@ -1,0 +1,22 @@
+name: DOE API - CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Config Cypress
+        run: cp ci/cypress.json cypress.json
+
+      - name: Install dependencies
+        run: npm i
+
+      - name: Run tests
+        run: npx cypress run
