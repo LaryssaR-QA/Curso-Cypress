@@ -47,5 +47,47 @@ describe('Helpers...', () => {
 
         })//its
 
+        it.only('Invoke ...', () => {
+            const getValue = () => 1;
+            const soma = (a,b) => a + b;
+
+            cy.wrap({ fn: getValue}).invoke('fn')//obj com função
+            .should('be.equal', 1)// acertiva
+
+            cy.wrap({ fn: soma}).invoke('fn', 2, 5)
+            .should('be.equal',7)
+
+            cy.visit('https://wcaquino.me/cypress/componentes.html') 
+            cy.get('#formNome').invoke('val', 'Texto via INVOKE')  
+
+            cy.window().invoke('alert', 'Dá pra ver?') //script na janela de aplicação
+
+            cy.get('#resultado')
+            .invoke('html', '<input type = "button", value = "Hacked!"/>')
+
+            let syncTitle
+
+
+            cy.title().then(title => {
+                console.log(title)
+   
+                cy.get('[data-cy=dataSobrenome]').type(title)
+                syncTitle = title              
+            })
+
+            cy.get('#tabelaUsuarios > :nth-child(2) > :nth-child(1) > :nth-child(6) > input').then($el =>{
+                $el.val(syncTitle)
+            })
+
+            cy.get(':nth-child(2) > :nth-child(6) > input').then($el => {
+                cy.wrap($el).type(syncTitle)
+
+            })
+
+        })//trabalha com funções com html
+
+
+
+
 
 })//describe fim   
