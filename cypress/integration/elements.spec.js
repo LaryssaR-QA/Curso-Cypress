@@ -65,16 +65,31 @@ describe('Work with basic elements',() => {
 
     })//Chequebox Comida seleção de mais de uma opção
 
-    it.only('Combo', () => {
+    it('Combo', () => {
 
         cy.get('[data-test=dataEscolaridade]')
         .select('2o grau completo')
         .should('have.value', '2graucomp')// validação do teste 
+
+        cy.get('[data-test=dataEscolaridade] option')
+        .should('have.length', 8)  //verificando a quantidade elementos
+
+        cy.get('[data-test=dataEscolaridade] option').then($arr => {
+            const valores = []
+            $arr.each(function() {
+                valores.push(this.innerHTML)
+            })
+            expect(valores).to.include.members(["Superior", "Mestrado"])//verificando o campo    
+            }) //função com array    
     })//combo de seleção
 
     it.only('ComboMultiplo', () => {
-        cy.get('[data-testid=dataEsportes]')
-        .select(['natacao', 'Corrida','nada'])
+        cy.get('[data-testid=dataEsportes]').select(['natacao', 'Corrida','nada'])
+
+        cy.get('[data-testid=dataEsportes]').then($el => {
+            expect($el.val()).to.be.deep.equal(['natacao', 'Corrida', 'nada'])
+            expect($el.val()).to.have.length(3)
+          })
 
     })//ComboMultiplo de seleção
 
