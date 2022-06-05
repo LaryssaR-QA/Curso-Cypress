@@ -17,7 +17,7 @@ describe('Work with alerts',() => {
             expect(msg).to.be.equal('Alert Simples')
 
         })//evento
-    })//pop up 
+    })
 
 
     it.only("Alert com Mork", () => {
@@ -27,7 +27,7 @@ describe('Work with alerts',() => {
         cy.get('#alert').click().then(() => {
          expect(stub.getCall(0)).to.be.calledWith('Alert Simples')
         })
-    })//pop up com com metodo mock
+    })//Alert up com com metodo mock
 
     it.only("Confirm", () => {
         cy.on('window:confirm', msg => {
@@ -38,10 +38,10 @@ describe('Work with alerts',() => {
         cy.on('window:alert', msg => {
             console.log(msg)
             expect(msg).to.be.equal('Confirmado')
-        })//alerta pop up
+        })//alerta Confirm
         cy.get('#confirm').click()
 
-    }) //cenario OK pop up confirm
+    }) //cenario OK confirm
 
     it.only("Deny", () => {
         cy.on('window:confirm', msg => {
@@ -53,11 +53,47 @@ describe('Work with alerts',() => {
         cy.on('window:alert', msg => {
             console.log(msg)
             expect(msg).to.be.equal('Negado')
-        })//alerta pop up
+        })//alerta com window
         cy.get('#confirm').click()
 
-    }) //cenario Cancela pop up confirm
+    }) //cenario Cancela confirm
 
 
+    it.only("Prompt", () => {
+
+       cy.window().then(win => {
+        cy.stub(win, 'prompt').returns('42')//stub 'generico'
+       })//metodo de comportamento windowns
+
+       cy.on('window:confirm', msg => {
+        expect(msg).to.be.equal('Era 42?')
+       })// verificações
+
+       cy.on('window:alert', msg =>{
+           expect(msg).to.be.equal(':D')
+       })//verificações
+        cy.get('#prompt').click()
+    }) //cenario Prompt
+
+    it.only('Validando mensagens', () => {
+        const stub = cy.stub().as('alerta')
+        cy.on('window:alert', stub)
+
+        cy.get('#formCadastrar').click()
+            .then(() => expect(stub.getCall(0)).to.be.calledWith('Nome eh obrigatorio'))
+
+        cy.get('#formNome').type('Lary')
+        cy.get('#formCadastrar').click()
+            .then(() => expect(stub.getCall(1)).to.be.calledWith('Sobrenome eh obrigatorio'))
+
+        cy.get('[data-cy=dataSobrenome]').type('Ribeiro')
+        cy.get('#formCadastrar').click()
+            .then(() => expect(stub.getCall(2)).to.be.calledWith('Sexo eh obrigatorio'))
+
+        cy.get('#formSexoFem').click()
+        cy.get('#formCadastrar').click()
+
+            cy.get('#resultado > :nth-child(1)').should('contain', 'Cadastrado!')
+    })//validando as mensagens
 
 })
