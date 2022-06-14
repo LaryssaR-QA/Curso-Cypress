@@ -10,17 +10,17 @@ describe('Work with alerts',() => {
         
     })//Em todos os Tests deve conter boas praticas no codigo "BEFORE EACH"
 
-    it("Alert", () => {
-        cy.get('#alert').click()
-        cy.on('window:alert', msg => {
-            console.log(msg)
-            expect(msg).to.be.equal('Alert Simples')
-
-        })//evento
+    it.only("Alert", () => {
+        //cy.get('#alert').click()
+        //cy.on('window:alert', msg => {
+        //    console.log(msg)
+       //     expect(msg).to.be.equal('Alert Simples')})//evento
+       
+       cy.clickAlert('#alert', 'Alert Simples')
     })
 
 
-    it.only("Alert com Mork", () => {
+    it("Alert com Mork", () => {
         const stub = cy.stub().as('alerta')
 
         cy.on('window:alert', stub)
@@ -29,7 +29,7 @@ describe('Work with alerts',() => {
         })
     })//Alert up com com metodo mock
 
-    it.only("Confirm", () => {
+    it("Confirm", () => {
         cy.on('window:confirm', msg => {
             console.log(msg)
             expect(msg).to.be.equal('Confirm Simples')
@@ -43,7 +43,7 @@ describe('Work with alerts',() => {
 
     }) //cenario OK confirm
 
-    it.only("Deny", () => {
+    it("Deny", () => {
         cy.on('window:confirm', msg => {
             console.log(msg)
             expect(msg).to.be.equal('Confirm Simples')
@@ -59,7 +59,7 @@ describe('Work with alerts',() => {
     }) //cenario Cancela confirm
 
 
-    it.only("Prompt", () => {
+    it("Prompt", () => {
 
        cy.window().then(win => {
         cy.stub(win, 'prompt').returns('42')//stub 'generico'
@@ -75,7 +75,7 @@ describe('Work with alerts',() => {
         cy.get('#prompt').click()
     }) //cenario Prompt
 
-    it.only('Validando mensagens', () => {
+    it('Validando mensagens', () => {
         const stub = cy.stub().as('alerta')
         cy.on('window:alert', stub)
 

@@ -18,10 +18,10 @@ describe('Work with alerts',() => {
 
     })//padrão de busca elemento
 
-    it('using xpath', () =>{
-
-        cy.xpath('//input')
-    })
+    it('using xpath', () => {
+        cy.xpath('//input[contains(@onclick, \'Francisco\')]')
+        cy.xpath("//table[@id='tabelaUsuarios']//td[contains(., 'Francisco')]//..//input[@type='text']")
+    })//busca com xpath
 
 })
 
