@@ -22,7 +22,9 @@ describe('Cypress basic', () => {
             console.log(title)
         })
 
-     })
+     }) //teste git
+
+     
 
     it('should find and interact with an elemento', () => {
         cy.visit('https://wcaquino.me/cypress/componentes.html')
