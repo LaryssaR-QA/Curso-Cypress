@@ -23,7 +23,7 @@ describe('Work with alerts',() => {
     it.only('Goes to the future', () => {
         
         cy.get('#buttonTimePassed').click()
-        cy.get('#resultado > span').should('contain', '16562')
+        cy.get('#resultado > span').should('contain', '165')
 
         cy.get('#resultado > span').invoke('text').should('gt', '1656291491279')  //greater assertive value
 
