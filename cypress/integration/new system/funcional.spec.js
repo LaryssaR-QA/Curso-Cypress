@@ -1,42 +1,53 @@
 /// <reference types="cypress" />
 
+import loc from'../../support/locators'  //todos os locators estão na variavel loc
+import '../../support/commandsConta'
+
 describe('Should test at a functional level',() => {
     before(() => {
-        cy.visit('http://barrigareact.wcaquino.me/')
+        cy.login('LaryssaFernandaR@hotmail.com', '12346')
+        cy.resetApp() //clear
 
-        cy.get('.input-group > .form-control').type('LaryssaFernandaR@hotmail.com')
-        cy.get(':nth-child(2) > .form-control').type('12346')
-
-        cy.get('.btn').click()
-
-        cy.get('.toast-message').should('contain', 'Bem vindo')//validation login
-    })//Em todos os Tests deve conter boas praticas no codigo "BEFORE all"
+    })//login sistem
 
     it('Should create an account ', () => {
-
-        cy.get('[data-test=menu-settings] > .fas').click()
-        cy.get('[href="/contas"]').click()
-
-        cy.get('[data-test=nome]').type('Nuconta teste')
-        cy.get('.btn').click()
-
-        cy.get('.toast-message').should('contain', 'Conta inserida com sucesso')
+        cy.AcessarMenuConta()
+        cy.InserirContas('Conta de teste')
+        cy.get(loc.MESSAGE).should('contain', 'Conta inserida com sucesso')
     })
 
     it('Should update an account', () => {
-        cy.get('[data-test=menu-settings] > .fas').click()
-        cy.get('[href="/contas"]').click()
+        cy.AcessarMenuConta()
 
-        cy.xpath("//table//td[contains(., 'Nuconta teste')]/..//i[@class='far fa-edit']").click()
-        cy.get('[data-test=nome]')
+        cy.xpath(loc.CONTAS.XP_BTN_ALTERAR).click()
+        cy.get(loc.CONTAS.NOME)
             .clear()
-            .type('Nuconta teste ALTERADA')
-        cy.get('.btn').click()
+            .type('Conta teste ALTERADA')
 
-        cy.get('.toast-message').should('contain', 'Conta atualizada com sucesso')
+        cy.get(loc.CONTAS.BTN_SALVAR).click()
+        cy.get(loc.MESSAGE).should('contain', 'Conta atualizada com sucesso')
+    })
 
-    })//modo de alteração ñ eficaz pois depende do test anterior para concluir o novo test
+    it('Should not create an account with same name', () => {
+        cy.AcessarMenuConta()
 
+        cy.get(loc.CONTAS.NOME).type('Conta teste ALTERADA')
+        cy.get(loc.CONTAS.BTN_SALVAR).click()
+        cy.get(loc.MESSAGE).should('contain', 'code 400')
+
+    })
+
+    it('should create a transaction', () => {
+        cy.get(loc.MENU.MOVIMENTACAO).click();
+
+        cy.get(loc.MOVIMENTACAO.DESCRICAO).type('CAD Movimentacao')
+        cy.get(loc.MOVIMENTACAO.VALOR).type('800.00')
+        cy.get(loc.MOVIMENTACAO.INTERESSADO).type('Algume banco')
+        cy.get(loc.MOVIMENTACAO.BTN_SALVAR).click()
+
+    cy.get(loc.MESSAGE).should('contain', 'sucesso')
+
+    })
 
 })
 
