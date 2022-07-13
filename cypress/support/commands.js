@@ -59,7 +59,7 @@ Cypress.Commands.add('getToken', (user, passwd) => {
             senha: passwd
         }//objeto
     }).its('body.token').should('not.be.empty')//validar o token
-    .then(token => {
+       .then(token => {
         return token
     })
 })
@@ -69,7 +69,7 @@ Cypress.Commands.add('resetRest', () => {
         cy.request({
             method: 'GET',
             url: '/reset',
-            headers: {Authorization: `JWT ${token}`},
+            headers: { Authorization: `JWT ${token}`}
                     
          }).its('status').should('be.equal', 200)
     })
