@@ -49,6 +49,8 @@ Cypress.Commands.add('resetApp', () => {
     cy.get(loc.MENU.RESET).click()
 })
 
+//----------------------------------Back
+
 Cypress.Commands.add('getToken', (user, passwd) => {
     cy.request({
         method: 'POST',
@@ -72,5 +74,6 @@ Cypress.Commands.add('resetRest', () => {
             headers: { Authorization: `JWT ${token}`}
                     
          }).its('status').should('be.equal', 200)
+         
     })
 })
