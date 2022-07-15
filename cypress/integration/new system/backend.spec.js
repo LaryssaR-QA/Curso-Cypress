@@ -16,12 +16,12 @@ describe('Should test at a functional level',() => {
 
     it('Should create an account ', () => { 
         cy.request({
-            url: '/contas',
+            url: '/contas', 
             method: 'POST',
             headers: {Authorization: `JWT ${token}`},
+           // failOnStatusCode: false,
             body: {
-                nome: 'Conta via rest'
-        }
+                nome: 'Conta via rest'}
             }).as('response')
 
         cy.get('@response').then(res => {
@@ -31,7 +31,7 @@ describe('Should test at a functional level',() => {
         })
     })
 
-    it('Should update an account', () => {      
+    it('Should update an account', () => {  
     })
 
     it('Should not create an account with same name', () => {
