@@ -55,15 +55,15 @@ Cypress.Commands.add('getToken', (user, passwd) => {
     cy.request({
         method: 'POST',
         url: '/signin',
+       //failOnStatusCode: false,
         body: {
             email: user,
             redirecionar: false,
             senha: passwd
         }//objeto
-    }).its('body.token').should('not.be.empty')//validar o token
-       .then(token => {
-        return token
-    })
+
+    }).its('body.token').should('not.be.empty').then(token => { return token})
+    
 })
 
 Cypress.Commands.add('resetRest', () => {
@@ -72,8 +72,7 @@ Cypress.Commands.add('resetRest', () => {
             method: 'GET',
             url: '/reset',
             headers: { Authorization: `JWT ${token}`}
-                    
-         }).its('status').should('be.equal', 200)
-         
+            //failOnStatusCode: false,                    
+         }).its('status').should('be.equal', 200)         
     })
 })
