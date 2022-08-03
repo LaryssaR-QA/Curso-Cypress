@@ -49,7 +49,7 @@ describe('Work with basic elements',() => {
     it('RadioButton', () =>{
         cy.get('#formSexoFem')
         .click()
-        .should('be.checked')//acertiva
+        .should('be.checked')//assertiva 
 
         cy.get('#formSexoMasc')
         .should('not.be.checked')//verificar se o masculuno não está selecionado

@@ -30,7 +30,7 @@ describe('Cypress basic', () => {
         cy.visit('https://wcaquino.me/cypress/componentes.html')
 
         cy.get('#buttonSimple').click()// opção clicar no botão
-        cy.get('#buttonSimple').should('have.value', 'Obrigado!')//acertiva
+        cy.get('#buttonSimple').should('have.value', 'Obrigado!')//assertiva 
 
     })//Função de clicar em um botão
     

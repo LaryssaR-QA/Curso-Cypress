@@ -7,6 +7,11 @@
 
 ## Comandos
 
+**Acesso ao sistema**
+
+Ao baixar o arquivo a pasta "cypress.env.json.example" deverá ser alterada para "cypress.env.json", e os campos E-mail e senha deverá ser preenchido.
+
+
 **Instalação das dependências**
 
 ```

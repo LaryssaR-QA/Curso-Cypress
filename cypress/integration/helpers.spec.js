@@ -4,7 +4,7 @@ describe('Helpers...', () => {
 
     it('Wrap', () => {
         const obj = { nome: 'User', idade: 20}
-        expect(obj).to.have.property('nome') //acertiva
+        expect(obj).to.have.property('nome') //assertiva 
 
         cy.wrap(obj).should('have.property', 'nome')
 
@@ -33,14 +33,14 @@ describe('Helpers...', () => {
 
         it.only('ITs...', () => {
         const obj = { nome: 'User', idade: 20}
-        cy.wrap(obj).should('have.property', 'nome', 'User')//acertiva
-        cy.wrap(obj).its('nome').should('be.equal', 'User')//acertiva
+        cy.wrap(obj).should('have.property', 'nome', 'User')//assertiva 
+        cy.wrap(obj).its('nome').should('be.equal', 'User')//assertiva 
 
         const obj2 = { nome: 'User', idade: 20, endereco:{rua: 'Areateste'} }
         
-        cy.wrap(obj2).its('endereco').should('have.property', 'rua')//acertiva
-        cy.wrap(obj2).its('endereco').its('rua').should('contain', 'teste')//acertiva
-        cy.wrap(obj2).its('endereco.rua').should('contain', 'teste')//acertiva
+        cy.wrap(obj2).its('endereco').should('have.property', 'rua')//assertiva 
+        cy.wrap(obj2).its('endereco').its('rua').should('contain', 'teste')//assertiva 
+        cy.wrap(obj2).its('endereco.rua').should('contain', 'teste')//assertiva 
 
         cy.visit('https://wcaquino.me/cypress/componentes.html')   
         cy.title().its('length').should('be.equal', 20)// caracter igual a 20
@@ -52,7 +52,7 @@ describe('Helpers...', () => {
             const soma = (a,b) => a + b;
 
             cy.wrap({ fn: getValue}).invoke('fn')//obj com função
-            .should('be.equal', 1)// acertiva
+            .should('be.equal', 1)// assertiva 
 
             cy.wrap({ fn: soma}).invoke('fn', 2, 5)
             .should('be.equal',7)
