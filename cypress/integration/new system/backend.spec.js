@@ -15,43 +15,40 @@ describe('Should test at a functional level', () => {
             method: 'POST',
             url: 'https://barrigarest.wcaquino.me/signin',
             body: {
-                email: "LaryssaFernandaR@hotmail.com",
+                email: Cypress.env('email'),
                 redirecionar: false,
-                senha: "12346"
+                senha: Cypress.env('password')
             }
 
         }).its("body.token").should("not.be.empty")//not vazio
             .then(async token => {
                 await cy.request({
 
-                    url: 'https://barrigareact.wcaquino.me/contas',
+                    url: 'https://barrigarest.wcaquino.me/contas',
                     method: 'POST',
-                    headers: { Authorization: `JWT ${token}`, 'Accept': 'application/json' },
+                    headers: { Authorization: `JWT ${token}` },
                     body: {
                         nome: 'Conta via rest'
                     }
-                }).then((res) => console.log(res));
-
-                /*.as('response')
-
-                    cy.get('@response').then(res => {
-                    expect(res.status).to.be.equal(201)
-                    expect(res.body).to.have.property('id')
-                    expect(res.body).to.have.property('nome', 'Conta via rest')
-                })*/
-
+                }).as('response')
             })
-    })
+
+        cy.get('@response').then(res => {
+            expect(res.status).to.be.equal(201)
+            expect(res.body).to.have.property('id')
+            expect(res.body).to.have.property('nome', 'Conta via rest')
+        })    
+})
 
 
-    it('Should update an account', () => {
-    })
+it('Should update an account', () => {
+})
 
-    it('Should not create an account with same name', () => {
-    })
+it('Should not create an account with same name', () => {
+})
 
-    it('should create a transaction', () => {
-    })
+it('should create a transaction', () => {
+})
 
 
 })
