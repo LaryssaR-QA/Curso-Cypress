@@ -15,6 +15,9 @@ jobs:
       - name: Config Cypress
         run: cp ci/cypress.json cypress.json
 
+      - name: Copy env's
+        run: cp ci/cypress.env.json.example cypress.env.json
+
       - name: Install dependencies
         run: npm i
 
