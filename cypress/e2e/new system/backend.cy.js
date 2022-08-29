@@ -12,7 +12,7 @@ describe('Should test at a functional level', () => {
 
     beforeEach(() => {
         cy.resetRest()
-    })//cleann
+    })//clean
     
     it('Should create an account ',  () => {  
         cy.request({
