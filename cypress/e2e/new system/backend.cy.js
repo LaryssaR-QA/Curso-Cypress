@@ -10,8 +10,8 @@ describe('Should test at a functional level', () => {
     })//clean
 
 
-    it('Should create an account ', async () => {
-        await cy.request({
+    it('Should create an account ',  () => {
+         cy.request({
             method: 'POST',
             url: 'https://barrigarest.wcaquino.me/signin',
             body: {
@@ -21,8 +21,8 @@ describe('Should test at a functional level', () => {
             }
 
         }).its("body.token").should("not.be.empty")//not vazio
-            .then(async token => {
-                await cy.request({
+            .then( token => {
+                 cy.request({
 
                     url: 'https://barrigarest.wcaquino.me/contas',
                     method: 'POST',
