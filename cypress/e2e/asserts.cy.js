@@ -47,7 +47,4 @@ expect(obj).to.have.property('b')
 expect(obj).to.have.property('b', 2)
 expect(obj).to.not.be.calledBefore.empty
 
-
-
-
 })//comparação
