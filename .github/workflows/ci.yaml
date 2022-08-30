@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Config Cypress
-        run: cp ci/cypress.json cypress.json
+        run: cp ci/cypress.config.js cypress.config.js
 
       - name: Copy env's
         run: cp ci/cypress.env.json.example cypress.env.json
