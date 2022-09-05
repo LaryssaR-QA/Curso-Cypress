@@ -14,7 +14,7 @@ describe('Should test at a functional level', () => {
         cy.resetRest()
     })//clean
     
-    it('Should create an account ',  () => {  
+    it('create an account ',  () => {  
         cy.request({
             url: '/contas',
             method: 'POST',
@@ -31,8 +31,27 @@ describe('Should test at a functional level', () => {
         })    
 })
 
+it('update an account', () => {
+    cy.request({
+        method:'GET',
+        url: '/contas',
+        headers: { Authorization: `JWT ${token}` },
+        qs: {
+            nome: 'Conta para alterar'
+        }
 
-it('Should update an account', () => {
+    }).then(res => {
+        cy.request({
+            url: `https://barrigarest.wcaquino.me/contas/${res.body[0].id}`,
+            method: 'PUT',
+            headers: { Authorization: `JWT ${token}` },
+            body: {
+                nome: 'conta alterada via rest'
+            }
+        }).as('response')
+        expect(res.status).to.be.equal(200)
+
+    })
 })
 
 it('Should not create an account with same name', () => {
