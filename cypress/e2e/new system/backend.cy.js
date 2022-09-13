@@ -42,19 +42,35 @@ it('update an account', () => {
 
     }).then(res => {
         cy.request({
-            url: `https://barrigarest.wcaquino.me/contas/${res.body[0].id}`,
+            url: `contas/${res.body[0].id}`,
             method: 'PUT',
             headers: { Authorization: `JWT ${token}` },
             body: {
-                nome: 'conta alterada via rest'
+                nome: 'onta alterada via rest'
             }
         }).as('response')
         expect(res.status).to.be.equal(200)
-
     })
 })
 
-it('Should not create an account with same name', () => {
+it.only('Should not create an account with same name', () => {
+    cy.request({
+        url: '/contas',
+        method: 'POST',
+        headers: { Authorization: `JWT ${token}` },
+        body: {
+            nome: 'Conta mesmo nome',
+            },
+
+        failOnStatusCode: false  //validar testes com erro
+
+        }).as('response')
+        
+    cy.get('@response').then(res => {
+        console.log(res)
+        expect(res.status).to.be.equal(400)
+        expect(res.body.error).to.have.equal('Já existe uma conta com esse nome!')
+    })
 })
 
 it('should create a transaction', () => {
