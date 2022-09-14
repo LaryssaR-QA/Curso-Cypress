@@ -1,4 +1,5 @@
 /// <reference types="cypress" />
+import dayjs from "dayjs"; //biblioteca 
 
 describe('Should test at a functional level', () => {
     let token
@@ -32,28 +33,21 @@ describe('Should test at a functional level', () => {
 })
 
 it('update an account', () => {
-    cy.request({
-        method:'GET',
-        url: '/contas',
-        headers: { Authorization: `JWT ${token}` },
-        qs: {
-            nome: 'Conta para alterar'
-        }
-
-    }).then(res => {
+    cy.getContasByName('Conta para alterar')
+    .then(contaId => {
         cy.request({
-            url: `contas/${res.body[0].id}`,
+            url: `contas/${contaId}`,
             method: 'PUT',
             headers: { Authorization: `JWT ${token}` },
             body: {
                 nome: 'onta alterada via rest'
             }
         }).as('response')
-        expect(res.status).to.be.equal(200)
     })
+    cy.get('@response').its('status').should('be.equal',200)
 })
 
-it.only('Should not create an account with same name', () => {
+it('Should not create an account with same name', () => {
     cy.request({
         url: '/contas',
         method: 'POST',
@@ -74,7 +68,25 @@ it.only('Should not create an account with same name', () => {
 })
 
 it('should create a transaction', () => {
-})
-
-
+    cy.getContasByName('Conta para movimentacoes')
+    .then(contaId => {
+        cy.request({
+            url: '/transacoes',
+            method: 'POST',
+            headers: { Authorization: `JWT ${token}` },
+            body: {
+                conta_id: contaId,
+                data_pagamento: dayjs().format('DD/MM/YYYY'), // formatacao data 1 dia atualizado
+                data_transacao: dayjs().format('DD/MM/YYYY'), //formatação data atualizada
+                descricao: "desc",
+                envolvido: "inter",
+                status: true,
+                tipo: "REC", //receita
+                valor: "6000"
+            }   
+        }).as('response') 
+     })
+     cy.get('@response').its('status').should('be.equal', 201)  
+     cy.get('@response').its('body.id').should('exist')
+    })
 })
