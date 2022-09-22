@@ -80,11 +80,13 @@ describe('Should test at a functional level', () => {
                     data_pagamento: dayjs().format('DD/MM/YYYY'), // formatacao data atualizada
                     data_transacao: dayjs().format('DD/MM/YYYY'), //formatação data atualizada
                     descricao: "desc",
-                    envolvido: "inter",
+                    envolvido: "bank",
                     status: true,
                     tipo: "REC", //receita
                     valor: "6000"
-                }   
+                },   
+                failOnStatusCode: false  //validar testes com erro
+
             }).as('response') 
         })
         cy.get('@response').its('status').should('be.equal', 201)  
