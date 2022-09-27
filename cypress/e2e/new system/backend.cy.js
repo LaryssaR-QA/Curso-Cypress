@@ -68,7 +68,7 @@ describe('Should test at a functional level', () => {
         })
     })
 
-    it('should create a transaction', () => {
+    it.only('should create a transaction', () => {
         cy.getContasByName('Conta para movimentacoes')
         .then(contaId => {
             cy.request({
@@ -88,7 +88,7 @@ describe('Should test at a functional level', () => {
                 failOnStatusCode: false  //validar testes com erro
             }).as('response') 
         })
-        //cy.get('@response').its('status').should('be.equal', 201)  
+        cy.get('@response').its('status').should('be.equal', 201)  
         cy.get('@response').its('body.id').should('exist')
     })
 
