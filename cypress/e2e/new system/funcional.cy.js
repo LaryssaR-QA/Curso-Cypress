@@ -5,7 +5,7 @@ import '../../support/commandsConta'
 
 describe('Should test at a functional level',() => {
     before(() => {
-        cy.login('LaryssaFernandaR@hotmail.com', '12346')
+        cy.login('teste@hotmail.com', '12346')
         cy.resetApp() //clear
 
     })//login sistem
