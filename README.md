@@ -16,17 +16,6 @@ Ao baixar o arquivo a pasta "cypress.env.json.example" deverá ser alterada para
 
 Foi instalado a dependencia dayjs (npm install dayjs) para realizar testes com data
 
-dayjs('2018-08-08') // parse
-
-dayjs().format('{YYYY} MM-DDTHH:mm:ss SSS [Z] A') // display
-
-dayjs().set('month', 3).month() // get & set
-
-dayjs().add(1, 'year') // manipulate
-
-dayjs().isBefore(dayjs()) // query
-
-
 ```
 npm i
 ``` 
