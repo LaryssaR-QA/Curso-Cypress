@@ -1,6 +1,5 @@
 /// <reference types="cypress" />
 import dayjs from "dayjs"; //biblioteca 
-import { method } from "lodash";
 
 describe('Should test at a functional level', () => {
     let token
@@ -68,7 +67,7 @@ describe('Should test at a functional level', () => {
         })
     })
 
-    it.only('should create a transaction', () => {
+    it('should create a transaction', () => {
         cy.getContasByName('Conta para movimentacoes')
         .then(contaId => {
             cy.request({
