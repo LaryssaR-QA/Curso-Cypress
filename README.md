@@ -15,6 +15,7 @@ Ao baixar o arquivo a pasta "cypress.env.json.example" deverá ser alterada para
 **Instalação das dependências**
 
 Foi instalado a dependência dayjs (npm install dayjs) para realizar testes com data
+
 Comando: failOnStatusCode: false  //validar testes com status de erro
 
 ```
