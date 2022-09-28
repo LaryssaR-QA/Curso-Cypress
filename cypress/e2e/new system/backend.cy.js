@@ -83,10 +83,10 @@ describe('Should test at a functional level', () => {
                     status: true,
                     tipo: "REC", //receita
                     valor: "6000"
-                },   
+                }, 
+                failOnStatusCode: false  //validar testes com erro  
             }).as('response') 
         })
-        failOnStatusCode: false  //validar testes com erro
         cy.get('@response').its('status').should('be.equal', 201)  
         cy.get('@response').its('body.id').should('exist')
     })
